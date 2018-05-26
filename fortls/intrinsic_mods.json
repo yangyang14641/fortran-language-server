@@ -900,18 +900,733 @@
     "type": 0,
     "name": "ieee_exceptions",
     "children": [
+      {
+        "name": "ieee_flag_type",
+        "type": 4
+      },
+      {
+        "name": "ieee_overflow",
+        "type": 3,
+        "desc": "TYPE(ieee_flag_type)"
+      },
+      {
+        "name": "ieee_divide_by_zero",
+        "type": 3,
+        "desc": "TYPE(ieee_flag_type)"
+      },
+      {
+        "name": "ieee_invalid",
+        "type": 3,
+        "desc": "TYPE(ieee_flag_type)"
+      },
+      {
+        "name": "ieee_underflow",
+        "type": 3,
+        "desc": "TYPE(ieee_flag_type)"
+      },
+      {
+        "name": "ieee_inexact",
+        "type": 3,
+        "desc": "TYPE(ieee_flag_type)"
+      },
+      {
+        "name": "ieee_usual",
+        "type": 3,
+        "desc": "TYPE(ieee_flag_type)",
+        "mods": ["DIMENSION(3)"]
+      },
+      {
+        "name": "ieee_all",
+        "type": 3,
+        "desc": "TYPE(ieee_flag_type)",
+        "mods": ["DIMENSION(5)"]
+      }
+
     ]
   },
   "ieee_arithmetic": {
     "type": 0,
     "name": "ieee_arithmetic",
+    "use": "ieee_exceptions",
     "children": [
+      {
+        "name": "ieee_status_type",
+        "type": 4
+      },
+      {
+        "name": "ieee_class_type",
+        "type": 4
+      },
+      {
+        "name": "ieee_round_type",
+        "type": 4
+      },
+      {
+        "name": "ieee_signaling_nan",
+        "type": 3,
+        "desc": "TYPE(ieee_class_type)"
+      },
+      {
+        "name": "ieee_quiet_nan",
+        "type": 3,
+        "desc": "TYPE(ieee_class_type)"
+      },
+      {
+        "name": "ieee_negative_inf",
+        "type": 3,
+        "desc": "TYPE(ieee_class_type)"
+      },
+      {
+        "name": "ieee_negative_normal",
+        "type": 3,
+        "desc": "TYPE(ieee_class_type)"
+      },
+      {
+        "name": "ieee_negative_denormal",
+        "type": 3,
+        "desc": "TYPE(ieee_class_type)"
+      },
+      {
+        "name": "ieee_negative_zero",
+        "type": 3,
+        "desc": "TYPE(ieee_class_type)"
+      },
+      {
+        "name": "ieee_positive_zero",
+        "type": 3,
+        "desc": "TYPE(ieee_class_type)"
+      },
+      {
+        "name": "ieee_positive_denormal",
+        "type": 3,
+        "desc": "TYPE(ieee_class_type)"
+      },
+      {
+        "name": "ieee_positive_normal",
+        "type": 3,
+        "desc": "TYPE(ieee_class_type)"
+      },
+      {
+        "name": "ieee_positive_inf",
+        "type": 3,
+        "desc": "TYPE(ieee_class_type)"
+      },
+      {
+        "name": "ieee_nearest",
+        "type": 3,
+        "desc": "TYPE(ieee_round_type)"
+      },
+      {
+        "name": "ieee_to_zero",
+        "type": 3,
+        "desc": "TYPE(ieee_round_type)"
+      },
+      {
+        "name": "ieee_up",
+        "type": 3,
+        "desc": "TYPE(ieee_round_type)"
+      },
+      {
+        "name": "ieee_down",
+        "type": 3,
+        "desc": "TYPE(ieee_round_type)"
+      },
+      {
+        "name": "ieee_other",
+        "type": 3,
+        "desc": "TYPE(ieee_round_type)"
+      },
+      {
+        "name": "ieee_class",
+        "type": 2,
+        "return": "TYPE(ieee_class_type)",
+        "args": "X",
+        "children": [
+          {
+            "name": "X",
+            "type": 3,
+            "desc": "REAL",
+            "mods": ["INTENT(in)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_copy_sign",
+        "type": 1,
+        "args": "X,Y",
+        "children": [
+          {
+            "name": "X",
+            "type": 3,
+            "desc": "REAL",
+            "mods": ["INTENT(inout)"]
+          },
+          {
+            "name": "Y",
+            "type": 3,
+            "desc": "REAL",
+            "mods": ["INTENT(in)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_get_flag",
+        "type": 1,
+        "args": "FLAG,FLAG_VALUE",
+        "children": [
+          {
+            "name": "FLAG",
+            "type": 3,
+            "desc": "TYPE(ieee_flag_type)",
+            "mods": ["INTENT(in)"]
+          },
+          {
+            "name": "FLAG_VALUE",
+            "type": 3,
+            "desc": "LOGICAL",
+            "mods": ["INTENT(out)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_set_flag",
+        "type": 1,
+        "args": "FLAG,FLAG_VALUE",
+        "children": [
+          {
+            "name": "FLAG",
+            "type": 3,
+            "desc": "TYPE(ieee_flag_type)",
+            "mods": ["INTENT(in)"]
+          },
+          {
+            "name": "FLAG_VALUE",
+            "type": 3,
+            "desc": "LOGICAL",
+            "mods": ["INTENT(in)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_get_halting_mode",
+        "type": 1,
+        "args": "FLAG,HALTING",
+        "children": [
+          {
+            "name": "FLAG",
+            "type": 3,
+            "desc": "TYPE(ieee_flag_type)",
+            "mods": ["INTENT(in)"]
+          },
+          {
+            "name": "HALTING",
+            "type": 3,
+            "desc": "LOGICAL",
+            "mods": ["INTENT(out)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_set_halting_mode",
+        "type": 1,
+        "args": "FLAG,HALTING",
+        "children": [
+          {
+            "name": "FLAG",
+            "type": 3,
+            "desc": "TYPE(ieee_flag_type)",
+            "mods": ["INTENT(in)"]
+          },
+          {
+            "name": "HALTING",
+            "type": 3,
+            "desc": "LOGICAL",
+            "mods": ["INTENT(in)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_get_rounding_mode",
+        "type": 1,
+        "args": "ROUND_VALUE",
+        "children": [
+          {
+            "name": "ROUND_VALUE",
+            "type": 3,
+            "desc": "TYPE(ieee_round_type)",
+            "mods": ["INTENT(out)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_set_rounding_mode",
+        "type": 1,
+        "args": "ROUND_VALUE",
+        "children": [
+          {
+            "name": "ROUND_VALUE",
+            "type": 3,
+            "desc": "TYPE(ieee_round_type)",
+            "mods": ["INTENT(in)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_get_status",
+        "type": 1,
+        "args": "STATUS_VALUE",
+        "children": [
+          {
+            "name": "STATUS_VALUE",
+            "type": 3,
+            "desc": "TYPE(ieee_status_type)",
+            "mods": ["INTENT(out)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_set_status",
+        "type": 1,
+        "args": "STATUS_VALUE",
+        "children": [
+          {
+            "name": "STATUS_VALUE",
+            "type": 3,
+            "desc": "TYPE(ieee_status_type)",
+            "mods": ["INTENT(in)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_is_finite",
+        "type": 2,
+        "return": "LOGICAL",
+        "args": "X",
+        "children": [
+          {
+            "name": "X",
+            "type": 3,
+            "desc": "REAL",
+            "mods": ["INTENT(in)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_is_nan",
+        "type": 2,
+        "return": "LOGICAL",
+        "args": "X",
+        "children": [
+          {
+            "name": "X",
+            "type": 3,
+            "desc": "REAL",
+            "mods": ["INTENT(in)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_is_negative",
+        "type": 2,
+        "return": "LOGICAL",
+        "args": "X",
+        "children": [
+          {
+            "name": "X",
+            "type": 3,
+            "desc": "REAL",
+            "mods": ["INTENT(in)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_is_normal",
+        "type": 2,
+        "return": "LOGICAL",
+        "args": "X",
+        "children": [
+          {
+            "name": "X",
+            "type": 3,
+            "desc": "REAL",
+            "mods": ["INTENT(in)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_logb",
+        "type": 2,
+        "return": "REAL",
+        "args": "X",
+        "children": [
+          {
+            "name": "X",
+            "type": 3,
+            "desc": "REAL",
+            "mods": ["INTENT(in)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_next_after",
+        "type": 2,
+        "return": "REAL",
+        "args": "X,Y",
+        "children": [
+          {
+            "name": "X",
+            "type": 3,
+            "desc": "REAL",
+            "mods": ["INTENT(in)"]
+          },
+          {
+            "name": "Y",
+            "type": 3,
+            "desc": "REAL",
+            "mods": ["INTENT(in)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_rem",
+        "type": 2,
+        "return": "REAL",
+        "args": "X,Y",
+        "children": [
+          {
+            "name": "X",
+            "type": 3,
+            "desc": "REAL",
+            "mods": ["INTENT(in)"]
+          },
+          {
+            "name": "Y",
+            "type": 3,
+            "desc": "REAL",
+            "mods": ["INTENT(in)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_rint",
+        "type": 2,
+        "return": "REAL",
+        "args": "X",
+        "children": [
+          {
+            "name": "X",
+            "type": 3,
+            "desc": "REAL",
+            "mods": ["INTENT(in)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_scalb",
+        "type": 2,
+        "return": "REAL",
+        "args": "X,I",
+        "children": [
+          {
+            "name": "X",
+            "type": 3,
+            "desc": "REAL",
+            "mods": ["INTENT(in)"]
+          },
+          {
+            "name": "I",
+            "type": 3,
+            "desc": "INTEGER",
+            "mods": ["INTENT(in)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_selected_real_kind",
+        "type": 2,
+        "return": "INTEGER",
+        "args": "P,R",
+        "children": [
+          {
+            "name": "P",
+            "type": 3,
+            "desc": "INTEGER",
+            "mods": ["OPTIONAL","INTENT(in)"]
+          },
+          {
+            "name": "R",
+            "type": 3,
+            "desc": "INTEGER",
+            "mods": ["OPTIONAL","INTENT(in)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_support_datatype",
+        "type": 2,
+        "return": "LOGICAL",
+        "args": "X",
+        "children": [
+          {
+            "name": "X",
+            "type": 3,
+            "desc": "REAL",
+            "mods": ["OPTIONAL","INTENT(in)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_support_denormal",
+        "type": 2,
+        "return": "LOGICAL",
+        "args": "X",
+        "children": [
+          {
+            "name": "X",
+            "type": 3,
+            "desc": "REAL",
+            "mods": ["OPTIONAL","INTENT(in)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_support_divide",
+        "type": 2,
+        "return": "LOGICAL",
+        "args": "X",
+        "children": [
+          {
+            "name": "X",
+            "type": 3,
+            "desc": "REAL",
+            "mods": ["OPTIONAL","INTENT(in)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_support_flag",
+        "type": 2,
+        "return": "LOGICAL",
+        "args": "FLAG,X",
+        "children": [
+          {
+            "name": "FLAG",
+            "type": 3,
+            "desc": "TYPE(ieee_flag_type)",
+            "mods": ["INTENT(in)"]
+          },
+          {
+            "name": "X",
+            "type": 3,
+            "desc": "REAL",
+            "mods": ["OPTIONAL","INTENT(in)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_support_halting",
+        "type": 2,
+        "return": "LOGICAL",
+        "args": "FLAG",
+        "children": [
+          {
+            "name": "FLAG",
+            "type": 3,
+            "desc": "TYPE(ieee_flag_type)",
+            "mods": ["INTENT(in)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_support_inf",
+        "type": 2,
+        "return": "LOGICAL",
+        "args": "X",
+        "children": [
+          {
+            "name": "X",
+            "type": 3,
+            "desc": "REAL",
+            "mods": ["OPTIONAL","INTENT(in)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_support_io",
+        "type": 2,
+        "return": "LOGICAL",
+        "args": "X",
+        "children": [
+          {
+            "name": "X",
+            "type": 3,
+            "desc": "REAL",
+            "mods": ["OPTIONAL","INTENT(in)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_support_nan",
+        "type": 2,
+        "return": "LOGICAL",
+        "args": "X",
+        "children": [
+          {
+            "name": "X",
+            "type": 3,
+            "desc": "REAL",
+            "mods": ["OPTIONAL","INTENT(in)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_support_rounding",
+        "type": 2,
+        "return": "LOGICAL",
+        "args": "ROUND_VALUE,X",
+        "children": [
+          {
+            "name": "FLAG",
+            "type": 3,
+            "desc": "TYPE(ieee_round_type)",
+            "mods": ["INTENT(in)"]
+          },
+          {
+            "name": "X",
+            "type": 3,
+            "desc": "REAL",
+            "mods": ["OPTIONAL","INTENT(in)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_support_sqrt",
+        "type": 2,
+        "return": "LOGICAL",
+        "args": "X",
+        "children": [
+          {
+            "name": "X",
+            "type": 3,
+            "desc": "REAL",
+            "mods": ["OPTIONAL","INTENT(in)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_support_standard",
+        "type": 2,
+        "return": "LOGICAL",
+        "args": "X",
+        "children": [
+          {
+            "name": "X",
+            "type": 3,
+            "desc": "REAL",
+            "mods": ["OPTIONAL","INTENT(in)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_unordered",
+        "type": 2,
+        "return": "LOGICAL",
+        "args": "X,Y",
+        "children": [
+          {
+            "name": "X",
+            "type": 3,
+            "desc": "REAL",
+            "mods": ["INTENT(in)"]
+          },
+          {
+            "name": "Y",
+            "type": 3,
+            "desc": "REAL",
+            "mods": ["INTENT(in)"]
+          }
+        ]
+      },
+      {
+        "name": "ieee_value",
+        "type": 2,
+        "return": "REAL",
+        "args": "X,CLASS",
+        "children": [
+          {
+            "name": "X",
+            "type": 3,
+            "desc": "REAL",
+            "mods": ["INTENT(in)"]
+          },
+          {
+            "name": "CLASS",
+            "type": 3,
+            "desc": "TYPE(ieee_class_type)",
+            "mods": ["INTENT(in)"]
+          }
+        ]
+      }
     ]
   },
   "ieee_features": {
     "type": 0,
     "name": "ieee_features",
     "children": [
+      {
+        "name": "ieee_features_type",
+        "type": 4
+      },
+      {
+        "name": "ieee_denormal",
+        "type": 3,
+        "desc": "TYPE(ieee_features_type)"
+      },
+      {
+        "name": "ieee_divide",
+        "type": 3,
+        "desc": "TYPE(ieee_features_type)"
+      },
+      {
+        "name": "ieee_halting",
+        "type": 3,
+        "desc": "TYPE(ieee_features_type)"
+      },
+      {
+        "name": "ieee_inexact_flag",
+        "type": 3,
+        "desc": "TYPE(ieee_features_type)"
+      },
+      {
+        "name": "ieee_inf",
+        "type": 3,
+        "desc": "TYPE(ieee_features_type)"
+      },
+      {
+        "name": "ieee_invalid_flag",
+        "type": 3,
+        "desc": "TYPE(ieee_features_type)"
+      },
+      {
+        "name": "ieee_nan",
+        "type": 3,
+        "desc": "TYPE(ieee_features_type)"
+      },
+      {
+        "name": "ieee_rounding",
+        "type": 3,
+        "desc": "TYPE(ieee_features_type)"
+      },
+      {
+        "name": "ieee_sqrt",
+        "type": 3,
+        "desc": "TYPE(ieee_features_type)"
+      },
+      {
+        "name": "ieee_underflow_flag",
+        "type": 3,
+        "desc": "TYPE(ieee_features_type)"
+      }
     ]
   }
 }

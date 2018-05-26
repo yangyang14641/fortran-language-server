@@ -74,7 +74,10 @@ def get_intrinsic_modules():
         if "mods" in json_obj:
             modifiers = parse_keywords(json_obj["mods"])
         if json_obj["type"] == 0:
-            return fortran_module(none_file, 0, json_obj["name"], enc_scope=enc_scope_name)
+            mod_tmp = fortran_module(none_file, 0, json_obj["name"], enc_scope=enc_scope_name)
+            if "use" in json_obj:
+                mod_tmp.add_use(json_obj["use"], 0)
+            return mod_tmp
         elif json_obj["type"] == 1:
             return fortran_subroutine(none_file, 0, json_obj["name"], enc_scope=enc_scope_name,
                                       args=args)
