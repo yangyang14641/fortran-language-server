@@ -816,6 +816,8 @@ class fortran_file:
         self.current_scope.add_use(mod_word, line_number, only_list)
 
     def add_include(self, path, line_number):
+        if os.name == "nt":
+            path = path.replace("/", "\\")
         self.include_stmnts.append([line_number, path, []])
 
     def start_ppif(self, line_number):
